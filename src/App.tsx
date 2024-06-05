@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import last from 'lodash/last'
+import { FC, Suspense, useEffect, useState } from 'react'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
-function App() {
+const App: FC<any> = () => {
+  const navigate = useNavigate()
+  const location: any = useLocation()
+  const [lastPath, setLastPath] = useState<any>()
+
+  useEffect(() => {
+    setLastPath(last(location?.pathname?.split('/') || []))
+  }, [location?.pathname])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Suspense fallback=''>
+      <div className='container'>
+        <nav className='navbar sticky-top py-0'>
+          <div className='container-fluid justify-content-center bg-white pt-3 pb-3'>
+            <div className='btn-group btn-group-pill'>
+              <div
+                onClick={() => navigate('single')}
+                className={`btn btn-${['single', '']?.includes(lastPath) ? 'dark' : 'outline-dark'}`}>
+                Single
+              </div>
+              <div
+                onClick={() => navigate('group')}
+                className={`btn btn-${['group']?.includes(lastPath) ? 'dark' : 'outline-dark'}`}>
+                Group
+              </div>
+              <div
+                onClick={() => navigate('sortable-group')}
+                className={`btn btn-${['sortable-group']?.includes(lastPath) ? 'dark' : 'outline-dark'}`}>
+                Sortable Group
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div className='container-fluid mb-5'>
+          <Outlet />
+        </div>
+      </div>
+    </Suspense>
+  )
 }
 
-export default App;
+export default App
