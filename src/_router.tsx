@@ -2,6 +2,7 @@ import { FC, Suspense } from 'react'
 import { createBrowserRouter, RouteObject, RouterProvider, useNavigate } from 'react-router-dom'
 
 import App from './App'
+import Dynamic from './modules/Dynamic'
 import Group from './modules/Group'
 import Single from './modules/Single'
 import SortableGroup from './modules/SortableGroup'
@@ -38,6 +39,7 @@ const BrowserRouter: FC = () => {
         { path: 'single', element: <SuspenseEl el={Single} /> },
         { path: 'group', element: <SuspenseEl el={Group} /> },
         { path: 'sortable-group', element: <SuspenseEl el={SortableGroup} /> },
+        { path: 'dynamic', element: <SuspenseEl el={Dynamic} /> },
         { path: '*', element: <PageNotFound /> },
       ],
     },

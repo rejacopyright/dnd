@@ -32,6 +32,11 @@ const App: FC<any> = () => {
                 className={`btn btn-${['sortable-group']?.includes(lastPath) ? 'dark' : 'outline-dark'}`}>
                 Sortable Group
               </div>
+              <div
+                onClick={() => navigate('dynamic')}
+                className={`btn btn-${['dynamic']?.includes(lastPath) ? 'dark' : 'outline-dark'}`}>
+                Dynamic
+              </div>
             </div>
           </div>
         </nav>

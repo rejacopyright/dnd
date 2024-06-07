@@ -17,3 +17,8 @@
 .border-light {
   border-color: #ccc !important;
 }
+.form-control:focus,
+.btn:focus-visible,
+.btn.show:focus-visible {
+  box-shadow: unset;
+}
